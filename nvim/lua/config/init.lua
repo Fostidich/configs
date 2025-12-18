@@ -1,0 +1,6 @@
+require "config.opt"
+require "config.lazy"
+require "config.functions"
+require "config.diagnostic"
+require "config.autocmd"
+require "config.keymap"

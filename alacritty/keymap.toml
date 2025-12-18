@@ -1,0 +1,38 @@
+# Move with word skipping
+[[keyboard.bindings]]
+key = "Left"
+mods = "Alt"
+chars = "\u001bb"
+[[keyboard.bindings]]
+key = "Right"
+mods = "Alt"
+chars = "\u001bf"
+
+# Move to start/end of line
+[[keyboard.bindings]]
+key = "Left"
+mods = "Command"
+chars = "\u001bOH"
+[[keyboard.bindings]]
+key = "Right"
+mods = "Command"
+chars = "\u001bOF"
+
+# Enter vi mode
+[[keyboard.bindings]]
+key = "ì"
+mods = "Command"
+action = "ToggleViMode"
+
+# Move with word skipping in vi mode
+[[keyboard.bindings]]
+key = "Left"
+mods = "Shift"
+mode = "Vi"
+action = "WordLeft"
+[[keyboard.bindings]]
+key = "Right"
+mods = "Shift"
+mode = "Vi"
+action = "WordRight"
+
