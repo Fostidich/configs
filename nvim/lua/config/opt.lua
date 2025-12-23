@@ -2,7 +2,7 @@ vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.linebreak = true
 vim.opt.spell = true
 vim.opt.tabstop = 4
@@ -23,3 +23,6 @@ vim.opt.updatetime = 50
 vim.opt.laststatus = 3
 vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "auto"
+
+vim.cmd.cnoreabbrev('hs', 'split')
+vim.cmd.cnoreabbrev('vs', 'vsplit')

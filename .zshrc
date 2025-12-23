@@ -10,21 +10,16 @@ zstyle ':completion:*' auto-description '%d'
 bindkey '^I' menu-complete
 
 # Prompt color customization
-c1=$((RANDOM % 6 + 1))
-while :; do
-  c2=$((RANDOM % 6 + 1))
-  [[ $c2 != $c1 ]] && break
-done
-PS1="%F{${c1}}%n@%m%f %F{${c2}}%1~%f "
+c=$((RANDOM % 6 + 1))
+PS1="%K{${c}}%F{#000} %2~ %k%F{${c}}%f "
 
 # Personal aliases
-alias b='back'
-alias c='cat'
+alias b='cd "$BACK"'
 alias d='tag la'
 alias l='tag ls'
 alias q='exit'
 alias v='nvim'
-alias cl='clear && clear'
+alias cl='clear && tmux clear-history 2>/dev/null'
 alias ip='ipconfig getifaddr en0'
 alias md='grip >/dev/null 2>&1 -b'
 alias img='kitty icat'
@@ -51,10 +46,10 @@ open-config() {
 # Show tree of git added files
 gitree() {
     (git ls-tree -r --name-only HEAD; \
-     git diff --cached --name-only --relative) \
+        git diff --cached --name-only --relative) \
         | sort -u \
         | tree --fromfile
-}
+    }
 
 # SSH keys
 ssh-load() {
@@ -94,28 +89,28 @@ nav() {
     for arg in "$@"; do
         for dir in ./"$arg"*; do
             if [ -d "$dir" ]; then
-                cd "$dir"
+                cd -q "$dir"
                 break
             fi
         done
     done
+    cd .
 }
 
 # Back navigation
-export BACK=$(pwd)
+export BACK="$(pwd)"
+export CURR="$(pwd)"
 
-back() {
-    temp="$BACK"
-    export BACK=$(pwd)
-    cd "$temp"
+chpwd() {
+    export BACK="$CURR"
+    export CURR="$(pwd)"
 }
 
 # Home
 export HM=~
 
 hm() {
-    export BACK=$(pwd)
-    cd $HM
+    cd -q $HM
     nav "$@"
 }
 
@@ -123,8 +118,7 @@ hm() {
 export DC=~/Documents
 
 dc() {
-    export BACK=$(pwd)
-    cd $DC
+    cd -q $DC
     nav "$@"
 }
 
@@ -132,8 +126,7 @@ dc() {
 export DW=~/Downloads
 
 dw() {
-    export BACK=$(pwd)
-    cd $DW
+    cd -q $DW
     nav "$@"
 }
 
@@ -141,8 +134,7 @@ dw() {
 export RP=~/Documents/Repos
 
 rp() {
-    export BACK=$(pwd)
-    cd $RP
+    cd -q $RP
     nav "$@"
 }
 
@@ -150,8 +142,7 @@ rp() {
 export IC=~/iCloud
 
 ic() {
-    export BACK=$(pwd)
-    cd $IC
+    cd -q $IC
     nav "$@"
 }
 
