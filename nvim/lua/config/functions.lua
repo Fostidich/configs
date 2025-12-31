@@ -33,3 +33,11 @@ function ToggleWrap()
 end
 
 vim.api.nvim_create_user_command("ToggleWrap", ToggleWrap, {})
+
+function ClearReg()
+    for i = 0, 255 do
+        pcall(vim.fn.setreg, string.char(i), {})
+    end
+end
+
+vim.api.nvim_create_user_command("ClearReg", ClearReg, {})

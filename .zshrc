@@ -8,10 +8,12 @@ zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu yes select
 zstyle ':completion:*' auto-description '%d'
 bindkey '^I' menu-complete
+bindkey -v
 
 # Prompt color customization
 c=$((RANDOM % 6 + 1))
 PS1="%K{${c}}%F{#000} %2~ %k%F{${c}}%f "
+RPS1="%F{${c}}%*"
 
 # Personal aliases
 alias b='cd "$BACK"'

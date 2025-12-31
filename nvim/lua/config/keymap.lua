@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", { desc = "Remove highlight" })
 vim.keymap.set("x", "p", [["_dP]], { desc = "Substitute text" })
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Unfocus from terminal" })
+vim.keymap.set("n", "zc", "z=1<cr><esc>e", { desc = "Select fist spelling alternative" })
 
 vim.keymap.set("v", "<C-j>", ":m '>+1<cr>gv=gv", { desc = "Move selected text down" })
 vim.keymap.set("v", "<C-k>", ":m '<-2<cr>gv=gv", { desc = "Move selected text up" })
