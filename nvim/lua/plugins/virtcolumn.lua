@@ -9,25 +9,15 @@ return {
         local virtcolumn = require("virt-column")
         virtcolumn.setup(opts)
 
-        local enabled = true
-        local scrolloff = vim.opt.scrolloff
-        vim.keymap.set("n", "\\", opts.virtcolumn .. "|", { desc = "Jump to virtual column" })
         vim.keymap.set("n", "<leader>;", function()
-            if enabled then
+            local state = require "config.functions"
+            if state.frame_enabled then
                 virtcolumn.setup({ virtcolumn = "" })
-                vim.opt.nu = false
-                vim.opt.relativenumber = false
-                vim.opt.scrolloff = 0
-                enabled = false
             else
                 virtcolumn.setup(opts)
-                vim.opt.nu = true
-                vim.opt.relativenumber = true
-                vim.opt.scrolloff = scrolloff
-                enabled = true
             end
-            vim.cmd "Gitsigns toggle_signs"
-            vim.cmd "redraw!"
+            ToggleFrame()
         end, { desc = "Toggle virtual column" })
+        vim.keymap.set("n", "\\", opts.virtcolumn .. "|", { desc = "Jump to virtual column" })
     end
 }

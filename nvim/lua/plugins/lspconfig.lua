@@ -29,6 +29,8 @@ return {
         vim.lsp.enable "gopls"
         vim.lsp.enable "sourcekit"
         vim.lsp.enable "jsonls"
+        vim.lsp.enable "protols"
+        vim.lsp.enable "graphql"
 
         vim.api.nvim_create_autocmd("LspAttach", {
             desc = "LSP settings set on attach",

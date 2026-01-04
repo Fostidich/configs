@@ -29,7 +29,14 @@ elif [[ "$1" == "up" ]]; then
     for file in ~/.env/*; do
         if [[ -f "$file" ]]; then
             env_name=$(basename "$file")
-            content=$(openssl enc -aes-256-cbc -d -in "$file" -pass pass:"$key" -pbkdf2 -iter 10000 2>/dev/null)
+            content=$(openssl enc /
+                -aes-256-cbc      /
+                -d                /
+                -in "$file"       /
+                -pass pass:"$key" /
+                -pbkdf2           /
+                -iter 10000       /
+            2>/dev/null)
             if [[ $? -ne 0 ]]; then
                 echo "Wrong key!"
                 return 1
@@ -58,7 +65,13 @@ elif [[ "$1" == "enc" ]]; then
     echo
     file=~/.env/"$2"
     plain=$3
-    openssl enc -aes-256-cbc -in "$plain" -pass pass:"$key" -pbkdf2 -iter 10000 -out "$file"
+    openssl enc           \
+        -aes-256-cbc      \
+        -in "$plain"      \
+        -pass pass:"$key" \
+        -pbkdf2           \
+        -iter 10000       \
+        -out "$file"      \
     echo "$2 updated"
 
 # Copy in clipboard

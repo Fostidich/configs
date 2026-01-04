@@ -1,3 +1,5 @@
+M = {}
+
 function ToggleQuickfix()
     local winid = vim.fn.getqflist({ winid = 0 }).winid
     if winid ~= 0 then
@@ -41,3 +43,28 @@ function ClearReg()
 end
 
 vim.api.nvim_create_user_command("ClearReg", ClearReg, {})
+
+M.frame_enabled = true
+local scrolloff = vim.opt.scrolloff
+local eob = vim.opt.fillchars:get().eob
+function ToggleFrame()
+    if M.frame_enabled then
+        vim.opt.nu = false
+        vim.opt.relativenumber = false
+        vim.opt.scrolloff = 0
+        vim.opt.fillchars:append { eob = " " }
+        M.frame_enabled = false
+    else
+        vim.opt.nu = true
+        vim.opt.relativenumber = true
+        vim.opt.scrolloff = scrolloff
+        vim.opt.fillchars:append { eob = eob }
+        M.frame_enabled = true
+    end
+    vim.cmd "Gitsigns toggle_signs"
+    vim.cmd "redraw!"
+end
+
+vim.api.nvim_create_user_command("ToggleFrame", ToggleFrame, {})
+
+return M
