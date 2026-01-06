@@ -1,4 +1,4 @@
-alias b='cd "$BACK"'
+alias b='cd ~-'
 alias d='tag la'
 alias l='tag ls'
 alias q='exit'
@@ -18,4 +18,6 @@ alias vconfig='open-config nvim'
 alias tconfig='open-config tmux'
 alias zconfig='nvim ~/.zshrc'
 alias pconfig='nvim ~/.zprofile'
+alias dotenv='source ~/Repos/configs/dotenv'
+alias nav='source ~/Repos/configs/nav'
 

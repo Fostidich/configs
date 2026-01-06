@@ -28,6 +28,7 @@ return {
         vim.lsp.enable "zls"
         vim.lsp.enable "gopls"
         vim.lsp.enable "sourcekit"
+        vim.lsp.enable "sqruff"
         vim.lsp.enable "jsonls"
         vim.lsp.enable "protols"
         vim.lsp.enable "graphql"

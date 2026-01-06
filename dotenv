@@ -29,13 +29,13 @@ elif [[ "$1" == "up" ]]; then
     for file in ~/.env/*; do
         if [[ -f "$file" ]]; then
             env_name=$(basename "$file")
-            content=$(openssl enc /
-                -aes-256-cbc      /
-                -d                /
-                -in "$file"       /
-                -pass pass:"$key" /
-                -pbkdf2           /
-                -iter 10000       /
+            content=$(openssl enc \
+                -aes-256-cbc      \
+                -d                \
+                -in "$file"       \
+                -pass pass:"$key" \
+                -pbkdf2           \
+                -iter 10000       \
             2>/dev/null)
             if [[ $? -ne 0 ]]; then
                 echo "Wrong key!"

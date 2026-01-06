@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+search=(${=@})      # The list of matches to look for
+result="$HOME/"     # The path to build
+
+fzf_best_dir() {
+    curr=$1         # The current folder in which to look
+    to_match=$2     # The text to match to a dir
+
+    # Find all dirs and links to dir
+    dirs=$(
+        find $curr -maxdepth 1 \( -type d -o -type l \) -exec test -d {} \; -print |
+        tail -n +2 |
+        xargs -n1 basename |
+        sort
+    )
+
+    # If search starts with dot look hidden dirs
+    [[ $to_match != \.* ]] && dirs=$(print $dirs | grep -v '^\.')
+
+    # Fuzzy find best match
+    dirs=$(
+        print $dirs |
+        fzf --filter=$to_match |
+        head -1
+    )
+
+    print $dirs
+}
+
+# Execute find function directly
+[[ $1 == "--" ]] && fzf_best_dir $2 $3 && return
+
+# Fuzzy match path
+for arg in $search; do
+    match=$(fzf_best_dir $result $arg)
+    [[ -z $match ]] && break
+    result="$result$match/"
+done
+
+cd $result
+
