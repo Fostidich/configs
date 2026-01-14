@@ -5,15 +5,18 @@ setopt HIST_IGNORE_SPACE    # Commands starting with space are not added to hist
 setopt RE_MATCH_PCRE        # Enable PCRE regex recognition
 
 # Enable and init ZSH completions
-source "$HOME/.zsh/fzf-tab/fzf-tab.zsh" # Enable fuzzy completions menu on tab
-eval "$(fzf --zsh)"                     # Enable fuzzy backward command search
-fpath=(~/.zsh/completions $fpath)       # Prepend custom completion dir to search path
-autoload -Uz compinit                   # Load ZSH command
-compinit                                # Initialize completion system
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':fzf-tab:*' query-string input
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit
+compinit
+eval "$(fzf --zsh)"
+source "$HOME/.zsh/fzf-tab/fzf-tab.zsh"
 
 # Prompt color customization
 c=$((RANDOM % 6 + 1))
 PS1="%K{${c}}%F{#000} %2~ %k%F{${c}}%f "
+echo -ne '\e[6 q'
 
 # Shell syntax highlights
 source ~/.zsh/syntax/zsh-syntax-highlighting.zsh

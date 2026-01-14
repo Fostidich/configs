@@ -71,7 +71,7 @@ elif [[ "$1" == "enc" ]]; then
         -pass pass:"$key" \
         -pbkdf2           \
         -iter 10000       \
-        -out "$file"      \
+        -out "$file"
     echo "$2 updated"
 
 # Copy in clipboard

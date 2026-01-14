@@ -3,12 +3,8 @@ command_not_found_handler() { }
 
 # Fuzzy traverse folders
 preexec() {
-    echo -ne '\e[6 q' # Update bar cursor
-
-    # Fuzzy traverse path
-    which "${1%% *}" >/dev/null 2>&1 || {
-        nav $1
-    }
+    echo -ne '\e[6 q'
+    which "${1%% *}" > /dev/null || nav $1
 }
 
 # Open config folder
@@ -21,11 +17,11 @@ open-config() {
 
 # Show tree of git added files
 gitree() {
-    (git ls-tree -r --name-only HEAD; \
-        git diff --cached --name-only --relative) \
-        | sort -u \
-        | tree --fromfile
-    }
+    (   git ls-tree -r --name-only HEAD;
+        git diff --cached --name-only --relative
+    ) | sort -u \
+      | tree --fromfile
+}
 
 # SSH keys
 ssh-load() {
