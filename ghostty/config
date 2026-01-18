@@ -3,6 +3,10 @@ font-feature = -calt
 font-size = 16
 
 theme = Everforest Dark Hard
+# term = xterm-256color
+# fullscreen = true
+title = ghostty
+working-directory = home
 
 # background-image = ghostty-wallpaper-blur.jpg
 # background-image-opacity = 0.15
@@ -10,16 +14,12 @@ theme = Everforest Dark Hard
 background-opacity = 0.85
 background-blur = true
 
-# term = xterm-256color
-
-# fullscreen = true
-title = ghostty
-working-directory = home
-
 window-padding-balance = true
 window-padding-color = extend
 window-padding-y = 0
 
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
+
+keybind = super+BracketRight=increase_font_size:1
 

@@ -16,13 +16,10 @@ vim.opt.smartindent = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
-vim.opt.scrolloff = 24
+vim.opt.scrolloff = 100
 vim.opt.virtualedit = ""
 vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 vim.opt.laststatus = 3
 vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "auto"
-
-vim.cmd.cnoreabbrev('hs', 'split')
-vim.cmd.cnoreabbrev('vs', 'vsplit')

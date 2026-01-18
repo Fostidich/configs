@@ -9,14 +9,13 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<cr>gv=gv", { desc = "Move selected text up
 vim.keymap.set("v", ">", ">gv", { desc = "Indend visual block" })
 vim.keymap.set("v", "<", "<gv", { desc = "Unindent visual block" })
 
-vim.keymap.set("n", "L", "G$", { desc = "Last file char" })
-vim.keymap.set("n", "H", "gg0", { desc = "First files char" })
+vim.keymap.set("n", "L", "G$zz", { desc = "Last file char" })
+vim.keymap.set("n", "H", "gg0zz", { desc = "First files char" })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go up a page" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Go down a page" })
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Append next line" })
-vim.keymap.set("n", "G", "Gzz", { desc = "Append next line" })
 vim.keymap.set("n", "n", "nzz", { desc = "Next match" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Previous match" })
 

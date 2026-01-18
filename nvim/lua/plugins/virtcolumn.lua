@@ -10,7 +10,7 @@ return {
         virtcolumn.setup(opts)
 
         vim.keymap.set("n", "<leader>;", function()
-            local state = require "config.functions"
+            local state = require "config.state"
             if state.frame_enabled then
                 virtcolumn.setup({ virtcolumn = "" })
             else

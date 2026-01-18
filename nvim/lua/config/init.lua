@@ -3,4 +3,6 @@ require "config.lazy"
 require "config.functions"
 require "config.diagnostic"
 require "config.autocmd"
+require "config.commands"
 require "config.keymap"
+
