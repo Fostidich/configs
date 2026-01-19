@@ -1,14 +1,14 @@
 #!/bin/zsh
 
-search=(${=@})      # The list of matches to look for
-result="$HOME/"     # The path to build
+local search=(${=@})      # The list of matches to look for
+local result="$HOME/"     # The path to build
 
 fzf_best_dir() {
-    curr=$1         # The current folder in which to look
-    to_match=$2     # The text to match to a dir
+    local curr=$1         # The current folder in which to look
+    local to_match=$2     # The text to match to a dir
 
     # Find all dirs and links to dir
-    dirs=$(
+    local dirs=$(
         find $curr -maxdepth 1 \( -type d -o -type l \) -exec test -d {} \; -print |
         tail -n +2 |
         xargs -n1 basename |
@@ -33,7 +33,7 @@ fzf_best_dir() {
 
 # Fuzzy match path
 for arg in $search; do
-    match=$(fzf_best_dir $result $arg)
+    local match=$(fzf_best_dir $result $arg)
     [[ -z $match ]] && break
     result="$result$match/"
 done

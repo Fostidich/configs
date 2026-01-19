@@ -20,6 +20,9 @@ compinit
 # Load FZF keybindings (e.g. C-r, C-t)
 eval "$(fzf --zsh)"
 
+# Init zoxide completions
+eval "$(zoxide init zsh)"
+
 # On multiple match, when tabbing, use FZF (not builtin cycle list)
 source ~/.zsh/fzf-tab/fzf-tab.zsh
 

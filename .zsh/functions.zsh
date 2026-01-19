@@ -8,10 +8,9 @@ preexec() {
 
 # Open tmux buffer in editor
 edit-tmux-pane() {
-    local tmp=$(mktemp)
-    tmux capture-pane -p -S - | tr "" ">" > "$tmp"
-    $EDITOR +'normal G{}b$' "$tmp"
-    rm "$tmp"
+    tmux capture-pane -p -S - |
+        tr "" ">" |
+        $EDITOR +'normal G{}b$' -R
 }
 
 # Open config folder

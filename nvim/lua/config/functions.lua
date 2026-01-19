@@ -35,20 +35,27 @@ function ClearReg()
 end
 
 function ToggleFrame()
-    local state = require "config.state"
-    if state.frame_enabled then
+    if vim.g.frame_enabled then
         vim.opt.nu = false
         vim.opt.relativenumber = false
         vim.opt.scrolloff = 0
         vim.opt.fillchars:append { eob = " " }
-        state.frame_enabled = false
+        vim.g.frame_enabled = false
     else
         vim.opt.nu = true
         vim.opt.relativenumber = true
-        vim.opt.scrolloff = state.scrolloff
-        vim.opt.fillchars:append { eob = state.eob }
-        state.frame_enabled = true
+        vim.opt.scrolloff = vim.g.scrolloff
+        vim.opt.fillchars:append { eob = vim.g.eob }
+        vim.g.frame_enabled = true
     end
     vim.cmd "Gitsigns toggle_signs"
     vim.cmd "redraw!"
+end
+
+function MSG()
+    local msgs = vim.split(vim.fn.execute('messages'), '\n')
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, msgs)
+    vim.api.nvim_open_win(buf, true, { split = "below" })
+    vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<cmd>close<cr>', {})
 end

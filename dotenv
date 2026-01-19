@@ -10,17 +10,17 @@ if [[ $# -eq 0 ]]; then
 
 # Help panel
 elif [[ "$1" == "help" ]]; then
-    cat <<EOF
+    cat <<-EOF
 
-  dotenv                      Print status
-  dotenv help                 Print help panel
-  dotenv up                   Load secrets env vars
-  dotenv down                 Unload secrets env vars
-  dotenv enc <var> <file>     Encrypt file content under given var
-  dotenv clip <var>           Copy secret in clipboard (pbcopy needed)
-  dotenv init                 Call when loading shell
+	  dotenv                      Print status
+	  dotenv help                 Print help panel
+	  dotenv up                   Load secrets env vars
+	  dotenv down                 Unload secrets env vars
+	  dotenv enc <var> <file>     Encrypt file content under given var
+	  dotenv clip <var>           Copy secret in clipboard (pbcopy needed)
+	  dotenv init                 Call when loading shell
 
-EOF
+	EOF
 
 # Decrypt, set variables
 elif [[ "$1" == "up" ]]; then
@@ -28,8 +28,8 @@ elif [[ "$1" == "up" ]]; then
     echo
     for file in ~/.env/*; do
         if [[ -f "$file" ]]; then
-            env_name=$(basename "$file")
-            content=$(openssl enc \
+            local env_name=$(basename "$file")
+            local content=$(openssl enc \
                 -aes-256-cbc      \
                 -d                \
                 -in "$file"       \
@@ -52,7 +52,7 @@ elif [[ "$1" == "up" ]]; then
 elif [[ "$1" == "down" ]]; then
     for file in ~/.env/*; do
         if [[ -f "$file" ]]; then
-            env_name=$(basename "$file")
+            local env_name=$(basename "$file")
             unset "$env_name"
         fi
     done
@@ -63,8 +63,8 @@ elif [[ "$1" == "down" ]]; then
 elif [[ "$1" == "enc" ]]; then
     read -s "key?Encryption key: "
     echo
-    file=~/.env/"$2"
-    plain=$3
+    local file=~/.env/"$2"
+    local plain=$3
     openssl enc           \
         -aes-256-cbc      \
         -in "$plain"      \

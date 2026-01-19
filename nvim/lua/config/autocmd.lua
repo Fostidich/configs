@@ -1,17 +1,28 @@
+vim.api.nvim_create_autocmd("StdinReadPre", {
+    desc = "Set flag if stdin is not empty",
+    callback = function()
+        vim.g.stdin = true
+    end,
+})
+
 vim.api.nvim_create_autocmd("VimEnter", {
     desc = "Open file explorer with no args",
     callback = function()
-        if vim.fn.argc() == 0 then
+        if vim.fn.argc() == 0 and not vim.g.stdin then
             vim.schedule(function()
                 require("oil").open()
             end)
+        else
+            vim.keymap.set("n", "q", "<cmd>quit<cr>")
         end
     end,
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight yanked text",
-    callback = function() vim.highlight.on_yank() end
+    callback = function()
+        vim.highlight.on_yank()
+    end
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -33,6 +44,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'WinNew', 'VimResized' }, 
     desc = "Set precis scrolloff for centered cursor",
     callback = function()
         vim.o.scrolloff = math.floor((vim.api.nvim_win_get_height(0) - 1) / 2)
-        require("config.state").scrolloff = vim.o.scrolloff
+        vim.g.scrolloff = vim.o.scrolloff
+    end,
+})
+
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+    desc = "Close commands history panel with q",
+    callback = function()
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
     end,
 })
