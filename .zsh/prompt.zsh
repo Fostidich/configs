@@ -42,18 +42,19 @@ PS1="%K{${c}}%F{#000} %2~ %k%F{${c}}%f "
 # Shell syntax highlights plugin
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)
-ZSH_HIGHLIGHT_REGEXP+=( '(?<=\s|^)\S*://\S*(?=\s|$)' fg=blue )
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=blue,bold'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=yellow,bold'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=yellow,bold'
-ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=blue,bold'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=red,bold'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=red,bold'
+ZSH_HIGHLIGHT_REGEXP+=( '(?<=\s|^)\S+://\S+(?=\s|$)' fg=blue )
+ZSH_HIGHLIGHT_REGEXP+=( '(?<=\s|^)\$\S+(?=\s|$)' fg=yellow )
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=green'
+ZSH_HIGHLIGHT_STYLES[function]='fg=green'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=red'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=red'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'

@@ -4,8 +4,8 @@ vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Unfocus from terminal" })
 vim.keymap.set("n", "zc", "z=1<cr><esc>e", { desc = "Select fist spelling alternative" })
 vim.keymap.set("n", "<leader>,", ToggleWrap, { desc = "Toggle text wrap option" })
 
-vim.keymap.set("n", "<C-b>", "mzyyp`zj", { desc = "Duplicate line" })
-vim.keymap.set("v", "<C-b>", "y`>p`[v`]", { desc = "Duplicate selection" })
+vim.keymap.set("n", "<leader>m", "mzyyp`zj", { desc = "Duplicate line" })
+vim.keymap.set("v", "<leader>m", "y`>p`[v`]", { desc = "Duplicate selection" })
 
 vim.keymap.set("v", "<C-j>", ":m '>+1<cr>gv=gv", { desc = "Move selected text down" })
 vim.keymap.set("v", "<C-k>", ":m '<-2<cr>gv=gv", { desc = "Move selected text up" })

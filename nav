@@ -28,8 +28,8 @@ fzf_best_dir() {
     print $dirs
 }
 
-# Execute find function directly
-[[ $1 == "--" ]] && fzf_best_dir $2 $3 && return
+# Remove dry execution arg id
+[[ $1 == "--" ]] && search=("${search[@]:1}")
 
 # Fuzzy match path
 for arg in $search; do
@@ -37,6 +37,9 @@ for arg in $search; do
     [[ -z $match ]] && break
     result="$result$match/"
 done
+
+# Dry execution
+[[ $1 == "--" ]] && print $result && return
 
 cd $result
 

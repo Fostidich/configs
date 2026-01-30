@@ -11,14 +11,13 @@ return {
         vim.keymap.set("n", "<leader>D", function()
             oil.open()
         end, { desc = "Open Oil with preview" })
-        vim.keymap.set("n", "<BS>", function()
+        vim.keymap.set("n", "<bs>", function()
             oil.open()
         end, { desc = "Open Oil with preview" })
 
         oil.setup({
             default_file_explorer = true,
-            columns = {
-            },
+            columns = {},
             constrain_cursor = "name",
             keymaps = {
                 ["<leader>d"] = { "actions.close", mode = "n", desc = "Open file explorer in float" },
@@ -37,10 +36,10 @@ return {
             use_default_keymaps = true,
             view_options = {
                 show_hidden = true,
-                is_hidden_file = function(name, bufnr)
+                is_hidden_file = function(name, _)
                     return name:match("^%.") ~= nil
                 end,
-                is_always_hidden = function(name, bufnr)
+                is_always_hidden = function(name, _)
                     return name == "." or name == ".." or name == ".DS_Store"
                 end,
             },
