@@ -3,6 +3,7 @@ vim.keymap.set("x", "p", [["_dP]], { desc = "Substitute text" })
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Unfocus from terminal" })
 vim.keymap.set("n", "zc", "z=1<cr><esc>e", { desc = "Select fist spelling alternative" })
 vim.keymap.set("n", "<leader>,", ToggleWrap, { desc = "Toggle text wrap option" })
+vim.keymap.set("n", "<leader>;", ToggleFrame, { desc = "Toggle virtual frame text" })
 
 vim.keymap.set("n", "<leader>m", "mzyyp`zj", { desc = "Duplicate line" })
 vim.keymap.set("v", "<leader>m", "y`>p`[v`]", { desc = "Duplicate selection" })

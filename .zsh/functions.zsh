@@ -21,6 +21,7 @@ v() {
 edit-tmux-pane() {
     tmux capture-pane -p -S - |
         tr "" ">" |
+        tail -n +2 |
         $EDITOR +'normal G{}b$' -R
 }
 
@@ -36,7 +37,7 @@ ss() {
 open-config() {
     pushd ~/Repos/configs/ > /dev/null
     cd "$1"
-    $EDITOR
+    $EDITOR .
     popd > /dev/null
 }
 

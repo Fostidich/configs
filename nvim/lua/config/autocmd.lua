@@ -1,13 +1,4 @@
-vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'WinNew', 'VimResized' }, {
-    desc = "Set precise scrolloff for centered cursor",
-    callback = function()
-        -- FIXME: fucks up after comp menu drops down
-        vim.o.scrolloff = math.floor((vim.api.nvim_win_get_height(0) - 1) / 2)
-        vim.g.scrolloff = vim.o.scrolloff
-    end,
-})
-
-vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'WinNew' }, {
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
     desc = "Quit with q on readonly buffers",
     callback = function()
         if vim.bo.readonly then
@@ -24,9 +15,17 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'WinNew' }, {
 })
 
 vim.api.nvim_create_autocmd("CmdwinEnter", {
-    desc = "Close commands history panel with q",
+    desc = "Close commands panel with q",
     callback = function()
         vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = true })
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "WinNew" }, {
+    callback = function()
+        if vim.fn.winnr("$") ~= 2 then return end
+        if vim.fn.win_gettype(2) ~= "" then return end
+        vim.api.nvim_win_set_width(0, 86)
     end,
 })
 
@@ -38,7 +37,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Remove trailing spaces",
+    desc = "Remove trailing spaces on save",
     callback = function()
         if vim.b.has_autofmt then return end
         vim.cmd([[%s/\s\+$//e]])

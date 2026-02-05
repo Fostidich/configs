@@ -1,9 +1,9 @@
 function ToggleQuickfix()
     local winid = vim.fn.getqflist({ winid = 0 }).winid
     if winid ~= 0 then
-        vim.cmd("cclose")
+        vim.cmd "cclose"
     else
-        vim.cmd("copen")
+        vim.cmd "copen"
     end
 end
 
@@ -31,24 +31,23 @@ end
 function ClearReg()
     for i = 0, 255 do
         pcall(vim.fn.setreg, string.char(i), {})
+        vim.cmd "wshada!"
     end
 end
 
 function ToggleFrame()
-    if vim.g.frame_enabled then
+    config.execute_frame_callbacks()
+    if config.frame_enabled then
         vim.opt.nu = false
         vim.opt.relativenumber = false
-        vim.opt.scrolloff = 0
         vim.opt.fillchars:append { eob = " " }
-        vim.g.frame_enabled = false
+        config.frame_enabled = false
     else
         vim.opt.nu = true
         vim.opt.relativenumber = true
-        vim.opt.scrolloff = vim.g.scrolloff
-        vim.opt.fillchars:append { eob = vim.g.eob }
-        vim.g.frame_enabled = true
+        vim.opt.fillchars:append { eob = config.startup_eob }
+        config.frame_enabled = true
     end
-    vim.cmd "Gitsigns toggle_signs"
     vim.cmd "redraw!"
 end
 
@@ -56,6 +55,8 @@ function MSG()
     local msgs = vim.split(vim.fn.execute('messages'), '\n')
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, msgs)
-    vim.api.nvim_open_win(buf, true, { split = "below" })
+    vim.api.nvim_open_win(buf, true, { split = "right" })
     vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '<cmd>close<cr>', {})
+    vim.cmd "$"
+    vim.cmd "normal $"
 end
