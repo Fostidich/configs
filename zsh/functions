@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # Clear command not found output
 command_not_found_handler() {
     print "$PWD"
@@ -5,7 +7,16 @@ command_not_found_handler() {
 
 # Fuzzy traverse folders
 preexec() {
-    which "${1%% *}" > /dev/null || nav $1
+    local cmdline=$1
+    local i=1
+    local words=(${(z)cmdline})
+    while (( i <= ${#words} )) && [[ ${words[i]} == *[A-Za-z_]*=* ]]; do
+        (( i++ ))
+    done
+    (( i <= ${#words} )) || return
+    local prog=${words[i]}
+    local trimmed_words=(${words[i,-1]})
+    which -- "$prog" > /dev/null 2>&1 || nav "$trimmed_words"
 }
 
 # Open nvim based on argv
@@ -35,7 +46,7 @@ ss() {
 
 # Open config folder
 open-config() {
-    pushd ~/Repos/configs/ > /dev/null
+    pushd ~/.config > /dev/null
     cd "$1"
     $EDITOR .
     popd > /dev/null

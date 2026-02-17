@@ -71,7 +71,6 @@ return {
                 mapset("n", "gf", vim.lsp.buf.format, "Format file")
 
                 local has_autofmt = client:supports_method("textDocument/formatting")
-                vim.b[args.buf].has_autofmt = has_autofmt
                 if has_autofmt then
                     vim.api.nvim_create_autocmd("BufWritePre", {
                         desc = "Autoformatting on save",
@@ -79,6 +78,15 @@ return {
                             vim.lsp.buf.format { bufrn = buffer, id = client.id }
                         end
                     })
+                else
+                    local filename = vim.api.nvim_buf_get_name(buffer)
+                    local extension = vim.fn.fnamemodify(filename, ":e")
+                    if extension == "md" then
+                        vim.keymap.set("n", "gf",
+                            "<cmd>w<cr>" ..
+                            "<cmd>silent !markdown-table-formatter %<cr>",
+                            { desc = "Format markdown tables", buffer = true })
+                    end
                 end
             end
         })

@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+alias dotenv='source ~/.config/zsh/dotenv'
+alias nav='source ~/.config/zsh/nav'
+
+source "$HOME/.config/zsh/prompt"
+source "$HOME/.config/zsh/aliases"
+source "$HOME/.config/zsh/functions"
+

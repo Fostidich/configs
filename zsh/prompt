@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # Load/enable ZSH commands
 autoload -U compinit
 autoload -U edit-command-line
@@ -34,6 +36,9 @@ zle -N edit-tmux-pane          # Open the history of the tmux pane inside a
 bindkey '^V' edit-tmux-pane    # nvim buffer, with C-v.
 zle -N edit-command-line       # Open the current command line in a nvim buffer
 bindkey '^E' edit-command-line # being able to edit it, with C-e.
+
+# Emacs mode
+bindkey -e
 
 # Prompt color customization
 c=$((RANDOM % 6 + 1))
