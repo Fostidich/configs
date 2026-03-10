@@ -1,4 +1,40 @@
-return {
+local presets = function()
+    vim.lsp.config("sourcekit", {
+        filetypes = { "swift", "objc", "objcpp" },
+    })
+    vim.lsp.config("graphql", {
+        filetypes = { "graphqls" },
+    })
+end
+
+local set_autofmt = function(callback, buffer)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = buffer,
+        desc = "Autoformatting on save",
+        callback = callback
+    })
+end
+
+local extensions = function(client, buffer)
+    if client.name == "markdown_oxide" then
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            desc = "Format markdown tables",
+            callback = function()
+                vim.cmd "silent !markdown-table-formatter %"
+            end
+        })
+    end
+
+    if client.name == "vtsls" then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        local vtsls_fmt = function() require("conform").format() end
+        vim.keymap.set("n", "gf", vtsls_fmt, { desc = "Format with Prettier" })
+        set_autofmt(vtsls_fmt, buffer)
+    end
+end
+
+M = {
     "neovim/nvim-lspconfig",
     dependencies = {
         { "saghen/blink.cmp" },
@@ -13,9 +49,7 @@ return {
         },
     },
     config = function()
-        vim.lsp.config("sourcekit", {
-            filetypes = { "swift", "objc", "objcpp" },
-        })
+        presets()
 
         vim.lsp.enable "lua_ls"
         vim.lsp.enable "markdown_oxide"
@@ -59,36 +93,28 @@ return {
                 mapdel("n", "gri")
                 mapdel("n", "grt")
 
-                mapset("n", "K", vim.lsp.buf.hover, "Hover documentation")
                 mapset("i", "<C-s>", vim.lsp.buf.signature_help, "Signature help")
+                mapset("n", "K", vim.lsp.buf.hover, "Hover documentation")
                 mapset("n", "gd", vim.lsp.buf.definition, "Go to definition")
                 mapset("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
                 mapset("n", "gI", vim.lsp.buf.implementation, "Go to implementation")
                 mapset("n", "gu", vim.lsp.buf.references, "Show references")
                 mapset("n", "gs", vim.lsp.buf.document_symbol, "Show document symbols")
-                mapset({ "n", "v" }, "ga", vim.lsp.buf.code_action, "Show code actions")
+                mapset("n", "ga", vim.lsp.buf.code_action, "Show code actions")
                 mapset("n", "gr", vim.lsp.buf.rename, "Rename symbol")
-                mapset("n", "gf", vim.lsp.buf.format, "Format file")
+
+                extensions(client, buffer)
 
                 local has_autofmt = client:supports_method("textDocument/formatting")
                 if has_autofmt then
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        desc = "Autoformatting on save",
-                        callback = function()
-                            vim.lsp.buf.format { bufrn = buffer, id = client.id }
-                        end
-                    })
-                else
-                    local filename = vim.api.nvim_buf_get_name(buffer)
-                    local extension = vim.fn.fnamemodify(filename, ":e")
-                    if extension == "md" then
-                        vim.keymap.set("n", "gf",
-                            "<cmd>w<cr>" ..
-                            "<cmd>silent !markdown-table-formatter %<cr>",
-                            { desc = "Format markdown tables", buffer = true })
-                    end
+                    mapset("n", "gf", vim.lsp.buf.format, "Format file")
+                    set_autofmt(function()
+                        vim.lsp.buf.format { bufrn = buffer, id = client.id }
+                    end, buffer)
                 end
             end
         })
     end
 }
+
+return M

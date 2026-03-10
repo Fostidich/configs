@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Print status
-if [[ $# -eq 0 ]]; then
+if [[ $# -eq 0 || "$1" == "status" ]]; then
     if [[ -z "$DOTENV_SET" ]]; then
         echo "dotenv is down"
     else
@@ -12,7 +12,7 @@ if [[ $# -eq 0 ]]; then
 elif [[ "$1" == "help" ]]; then
     cat <<-EOF
 
-	  dotenv                      Print status
+	  dotenv [status]             Print status
 	  dotenv help                 Print help panel
 	  dotenv up                   Load secrets env vars
 	  dotenv down                 Unload secrets env vars

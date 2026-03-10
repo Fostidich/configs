@@ -38,6 +38,9 @@ export PATH="$PATH:$SWIFTLY_BIN_DIR"
 export PATH="$PATH:$HOME/.pyenv/shims"
 source "$HOME/.pyenv/env.zsh"
 
+# GNU lib
+export PATH="$PATH:/opt/homebrew/opt/grep/libexec/gnubin"
+
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=86400
 export HOMEBREW_NO_ENV_HINTS=1

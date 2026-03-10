@@ -1,12 +1,12 @@
 #!/bin/zsh
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+mkdir ~/.config 2>/dev/null
 
-ln -sfn ${SCRIPT_DIR}/ghostty ~/.config
-ln -sfn ${SCRIPT_DIR}/nvim ~/.config
-ln -sfn ${SCRIPT_DIR}/tmux ~/.config
-ln -sfn ${SCRIPT_DIR}/zsh ~/.config
-
+ln -sfn $SCRIPT_DIR/ghostty ~/.config
+ln -sfn $SCRIPT_DIR/nvim ~/.config
+ln -sfn $SCRIPT_DIR/tmux ~/.config
+ln -sfn $SCRIPT_DIR/zsh ~/.config
 ln -sfn .config/zsh/zshrc ~/.zshrc
 ln -sfn .config/zsh/zprofile ~/.zprofile
 
