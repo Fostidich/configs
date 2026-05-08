@@ -5,6 +5,7 @@ return {
     config = function()
         local oil = require "oil"
 
+
         vim.keymap.set("n", "<leader>D", function()
             oil.open_float(nil, { preview = { enabled = true } })
         end, { desc = "Open Oil in float with preview" })
@@ -17,6 +18,7 @@ return {
         end, { desc = "Open Oil with preview" })
 
         oil.setup({
+            silence_scp_warning = true,
             default_file_explorer = true,
             columns = {},
             delete_to_trash = true,
@@ -46,7 +48,9 @@ return {
                     return name:match("^%.") ~= nil
                 end,
                 is_always_hidden = function(name, _)
-                    return name == "." or name == ".." or name == ".DS_Store"
+                    return name == "."
+                        or name == ".."
+                        or name == ".DS_Store"
                 end,
             },
             float = {

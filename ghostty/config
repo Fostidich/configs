@@ -1,13 +1,12 @@
 # font-family = FiraCode Nerd Font Mono
 font-family = Zed Plex Mono
 font-feature = -calt
-font-size = 16
+font-size = 13
 
-theme = Everforest Dark Hard
-# term = xterm-256color
 # fullscreen = true
 title = ghostty
 working-directory = home
+theme = Everforest Dark Hard
 
 # background-image = ghostty-wallpaper-blur.jpg
 # background-image-opacity = 0.15
@@ -22,5 +21,6 @@ window-padding-y = 0
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
 
+# term = xterm-256color
 keybind = super+BracketRight=increase_font_size:1
 

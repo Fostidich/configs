@@ -56,6 +56,7 @@ M = {
         vim.lsp.enable "vtsls"
         vim.lsp.enable "html"
         vim.lsp.enable "cssls"
+        vim.lsp.enable "ruff"
         vim.lsp.enable "pyright"
         vim.lsp.enable "clangd"
         vim.lsp.enable "omnisharp"
@@ -76,7 +77,6 @@ M = {
                 local buffer = args.buf
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
                 if not client then return end
-                print("LSP attached: " .. client.name)
 
                 local mapset = function(mode, lhs, rhs, desc)
                     vim.keymap.set(mode, lhs, rhs, { buffer = buffer, silent = true, desc = desc })

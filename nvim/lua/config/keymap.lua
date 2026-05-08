@@ -1,5 +1,4 @@
 vim.keymap.set("n", "<esc>", "<cmd>noh<cr>", { desc = "Remove highlight" })
-vim.keymap.set("x", "p", [["_dP]], { desc = "Substitute text" })
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { desc = "Unfocus from terminal" })
 vim.keymap.set("n", "zc", "z=1<cr><esc>e", { desc = "Select fist spelling alternative" })
 vim.keymap.set("n", "<leader>,", ToggleWrap, { desc = "Toggle text wrap option" })

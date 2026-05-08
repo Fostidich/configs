@@ -44,6 +44,9 @@ bindkey '^E' edit-command-line # being able to edit it, with C-e.
 c=$((RANDOM % 6 + 1))
 PS1="%K{${c}}%F{#000} %2~ %k%F{${c}}%f "
 
+# Avoid venv in prompt with python activate
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # Shell syntax highlights plugin
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main regexp)

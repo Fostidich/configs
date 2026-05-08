@@ -17,6 +17,7 @@ elif [[ "$1" == "help" ]]; then
 	  dotenv up                   Load secrets env vars
 	  dotenv down                 Unload secrets env vars
 	  dotenv enc <var> <file>     Encrypt file content under given var
+	  dotenv ls                   List stored secrets
 	  dotenv clip <var>           Copy secret in clipboard (pbcopy needed)
 	  dotenv init                 Call when loading shell
 
@@ -74,9 +75,21 @@ elif [[ "$1" == "enc" ]]; then
         -out "$file"
     echo "$2 updated"
 
+# List stored secrets
+elif [[ "$1" == "ls" ]]; then
+    ls ~/.env
+
 # Copy in clipboard
 elif [[ "$1" == "clip" ]]; then
-    echo "$2" | pbcopy
+    if [[ -z "$DOTENV_SET" ]]; then
+        source "$0" up
+        eval "echo \$$2" | pbcopy
+        echo "\$$2 copied to clipboard"
+        source "$0" down
+    else
+        eval "echo \$$2" | pbcopy
+        echo "\$$2 copied to clipboard"
+    fi
 
 # Create alias on shell startup
 elif [[ "$1" == "init" ]]; then

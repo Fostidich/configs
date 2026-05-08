@@ -3,6 +3,9 @@
 # Local programs
 export PATH="$PATH:$HOME/.local/bin"
 
+# FZF
+export PATH="$PATH:/opt/homebrew/opt/fzf/bin"
+
 # .NET
 export DOTNET_ROOT="/usr/local/share/dotnet"
 export PATH="$PATH:$HOME/.dotnet/tools"
@@ -13,9 +16,6 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # Go
 export PATH="$PATH:$HOME/go/bin"
-
-# FZF
-export PATH="$PATH:/opt/homebrew/opt/fzf/bin"
 
 # Java
 export PATH="$PATH:/opt/homebrew/opt/openjdk@21/bin"
@@ -38,8 +38,14 @@ export PATH="$PATH:$SWIFTLY_BIN_DIR"
 export PATH="$PATH:$HOME/.pyenv/shims"
 source "$HOME/.pyenv/env.zsh"
 
+# Colima for Docker
+export DOCKER_HOST="unix://$HOME/.colima/default/docker.sock"
+
 # GNU lib
 export PATH="$PATH:/opt/homebrew/opt/grep/libexec/gnubin"
+
+# Postgres SQL
+export PATH="$PATH:/opt/homebrew/opt/postgresql@18/bin"
 
 # Homebrew
 export HOMEBREW_AUTO_UPDATE_SECS=86400

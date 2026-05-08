@@ -7,16 +7,17 @@ command_not_found_handler() {
 
 # Fuzzy traverse folders
 preexec() {
-    local cmdline=$1
-    local i=1
-    local words=(${(z)cmdline})
-    while (( i <= ${#words} )) && [[ ${words[i]} == *[A-Za-z_]*=* ]]; do
-        (( i++ ))
-    done
-    (( i <= ${#words} )) || return
-    local prog=${words[i]}
-    local trimmed_words=(${words[i,-1]})
-    which -- "$prog" > /dev/null 2>&1 || nav "$trimmed_words"
+    local cmdline=$1 # get user's command
+
+    [[ "$cmdline" == *$'\n'* ]] && return           # skip if 2+ lines
+    [[ "$cmdline" == *[^[:alnum:]\ .]* ]] && return # skip if there's a symbol
+
+    local words=(${(z)cmdline})   # get command program and args
+    (( ${#words} > 0 )) || return # skip empty lines
+    local prog=${words[1]}        # get program name
+
+    # If program doesn't exist, use navigation script
+    which -- "$prog" > /dev/null 2>&1 || nav "${words[@]}"
 }
 
 # Open nvim based on argv
