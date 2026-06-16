@@ -1,36 +1,36 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = 'master',
+    branch = "main",
     lazy = false,
     build = ":TSUpdate",
     config = function()
-        require("nvim-treesitter.configs").setup {
-            ensure_installed = {
-                "vimdoc",
-                "query",
-                "markdown",
-                "markdown_inline",
-                "lua",
-                "javascript",
-                "typescript",
-                "html",
-                "css",
-                "python",
-                "c",
-                "cpp",
-                "cmake",
-                "java",
-                "rust",
-                "zig",
-                "go",
-                "swift"
-            },
-            sync_install = false,
-            auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
+        local ts = require("nvim-treesitter")
+
+        local languages = {
+            "javascript",
+            "typescript",
+            "html",
+            "css",
+            "python",
+            "c",
+            "cpp",
+            "cmake",
+            "java",
+            "rust",
+            "zig",
+            "go",
+            "swift"
         }
+
+        ts.setup({})
+        ts.install(languages)
+
+        -- Automatically enable Tree-sitter for installed languages
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = languages,
+            callback = function()
+                vim.treesitter.start()
+            end,
+        })
     end
 }

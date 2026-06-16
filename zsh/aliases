@@ -9,8 +9,8 @@ alias c='clear && tmux clear-history 2>/dev/null'
 alias path='echo $PATH | tr : "\n"'
 alias ip='ipconfig getifaddr en0'
 
-alias md='grip >/dev/null 2>&1 -b'
-alias act='source (.||_)venv/bin/activate'
+alias md='grip -b >/dev/null 2>&1'
+alias act='eval $(py-act)'
 alias icat='kitty icat'
 
 alias src='source ~/.zshrc'

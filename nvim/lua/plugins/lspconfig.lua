@@ -103,6 +103,8 @@ M = {
                 mapset("n", "ga", vim.lsp.buf.code_action, "Show code actions")
                 mapset("n", "gr", vim.lsp.buf.rename, "Rename symbol")
 
+                client.server_capabilities.semanticTokensProvider = nil
+
                 extensions(client, buffer)
 
                 local has_autofmt = client:supports_method("textDocument/formatting")

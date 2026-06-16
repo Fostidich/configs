@@ -41,7 +41,7 @@ edit-tmux-pane() {
 ss() {
     local dir="."
     [[ $# != 0 ]] && dir="$(nav -- "$@")"
-    cd "$(find $dir -type d -not -path '*/.git/*' 2>/dev/null |
+    cd "$(find $dir -type d -not -path '*/.*' 2>/dev/null |
           fzf --preview 'echo -e "\033[1;31m{}\033[0m\n"; tag la {}')"
 }
 
@@ -76,5 +76,22 @@ makepdf() {
     pdflatex main.tex > /dev/null
     pdflatex main.tex > /dev/null
     rm -rf *.aux *.log *.out *.toc *.fls _minted
+}
+
+py-act() {
+    print "command -v deactivate && deactivate;"
+    print "source (.||_)venv/bin/activate 2>/dev/null && echo activate;"
+}
+
+..() {
+    b=${1:-1}
+    res=""
+    [[ -n "$1" ]] && print "0: $(pwd)"
+    [[ 1 -gt $b ]] && return
+    for n in $(seq $b); do
+        res="../$res"
+        [[ -n "$1" ]] && print "$n: $(cd $res; pwd)"
+    done
+    cd "$res"
 }
 
