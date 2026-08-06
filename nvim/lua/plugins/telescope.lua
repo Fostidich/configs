@@ -3,14 +3,21 @@ return {
     version = "*",
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
+        require("telescope").setup({
+            pickers = {
+                find_files = {
+                    find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" },
+                },
+            },
+        })
         local builtin = require "telescope.builtin"
 
         local function project_files()
             local is_git_repo = vim.fn.systemlist("git rev-parse --is-inside-work-tree")[1] == "true"
             if is_git_repo then
-                builtin.git_files()
+                builtin.git_files({ hidden = true })
             else
-                builtin.find_files()
+                builtin.find_files({ hidden = true })
             end
         end
 

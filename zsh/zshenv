@@ -28,6 +28,11 @@ export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:$DYLD_LIBRARY_PATH"
 export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
 export VK_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
 
+# LLVM
+export PATH="$PATH:/opt/homebrew/opt/llvm/bin"
+export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
 # Swiftly
 export SWIFTLY_HOME_DIR="$HOME/.swiftly"
 export SWIFTLY_BIN_DIR="$HOME/.swiftly/bin"

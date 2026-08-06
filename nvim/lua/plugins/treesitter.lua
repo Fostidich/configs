@@ -22,10 +22,9 @@ return {
             "swift"
         }
 
-        ts.setup({})
+        ts.setup()
         ts.install(languages)
 
-        -- Automatically enable Tree-sitter for installed languages
         vim.api.nvim_create_autocmd("FileType", {
             pattern = languages,
             callback = function()

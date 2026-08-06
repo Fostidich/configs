@@ -59,6 +59,7 @@ M = {
         vim.lsp.enable "ruff"
         vim.lsp.enable "pyright"
         vim.lsp.enable "clangd"
+        vim.lsp.enable "glsl_analyzer"
         vim.lsp.enable "omnisharp"
         vim.lsp.enable "jdtls"
         vim.lsp.enable "cmake"

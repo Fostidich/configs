@@ -55,10 +55,11 @@ open-config() {
 
 # Show tree of git added files
 gitree() {
-    (   git ls-tree -r --name-only HEAD;
+    (   cd "${1:-.}"
+        git ls-tree -r --name-only HEAD;
         git diff --cached --name-only --relative
     ) | sort -u \
-      | tree --fromfile
+      | tree -a --fromfile
 }
 
 # SSH keys

@@ -8,5 +8,5 @@ ln -sfn $SCRIPT_DIR/nvim ~/.config
 ln -sfn $SCRIPT_DIR/tmux ~/.config
 ln -sfn $SCRIPT_DIR/zsh ~/.config
 ln -sfn .config/zsh/zshrc ~/.zshrc
-ln -sfn .config/zsh/zprofile ~/.zprofile
+ln -sfn .config/zsh/zshenv ~/.zshenv
 
