@@ -5,6 +5,9 @@ local presets = function()
     vim.lsp.config("graphql", {
         filetypes = { "graphqls" },
     })
+    vim.filetype.add({
+        extension = { gltf = "json", },
+    })
 end
 
 local set_autofmt = function(callback, buffer)
@@ -20,7 +23,7 @@ local extensions = function(client, buffer)
         vim.api.nvim_create_autocmd("BufWritePost", {
             desc = "Format markdown tables",
             callback = function()
-                vim.cmd "silent !markdown-table-formatter %"
+                vim.cmd "silent !prettier --write --prose-wrap always %"
             end
         })
     end
@@ -51,26 +54,21 @@ M = {
     config = function()
         presets()
 
-        vim.lsp.enable "lua_ls"
-        vim.lsp.enable "markdown_oxide"
-        vim.lsp.enable "vtsls"
-        vim.lsp.enable "html"
-        vim.lsp.enable "cssls"
-        vim.lsp.enable "ruff"
-        vim.lsp.enable "pyright"
-        vim.lsp.enable "clangd"
-        vim.lsp.enable "glsl_analyzer"
-        vim.lsp.enable "omnisharp"
-        vim.lsp.enable "jdtls"
-        vim.lsp.enable "cmake"
-        vim.lsp.enable "rust_analyzer"
-        vim.lsp.enable "zls"
-        vim.lsp.enable "gopls"
-        vim.lsp.enable "sourcekit"
-        vim.lsp.enable "sqruff"
-        vim.lsp.enable "jsonls"
-        vim.lsp.enable "protols"
-        vim.lsp.enable "graphql"
+        vim.lsp.enable "lua_ls"         -- LUA: lua-language-server (brew)
+        vim.lsp.enable "jsonls"         -- JSON: vscode-json-languageserver (npm: vscode-langservers-extracted)
+        vim.lsp.enable "html"           -- HTML: vscode-html-languageserver (npm: vscode-langservers-extracted)
+        vim.lsp.enable "cssls"          -- CSS: vscode-css-languageserver (npm: vscode-langservers-extracted)
+        vim.lsp.enable "vtsls"          -- JS/TS: vtsls (npm: @vtsls/language-server)
+        vim.lsp.enable "clangd"         -- C/CPP: clangd (brew: llvm)
+        vim.lsp.enable "omnisharp"      -- C#: omnisharp (.local)
+        vim.lsp.enable "ruff"           -- PYTHON: ruff (pipx)
+        vim.lsp.enable "pyright"        -- PYTHON: pyright-langserver (npm: pyright)
+        vim.lsp.enable "rust_analyzer"  -- RUST: rust-analyzer (rustup)
+        vim.lsp.enable "gopls"          -- GO: gopls (go)
+        vim.lsp.enable "sourcekit"      -- SWIFT: sourcekit-lsp (xcrun)
+        vim.lsp.enable "sqruff"         -- SQL: sqruff (brew)
+        vim.lsp.enable "markdown_oxide" -- MD: markdown-oxide (brew)
+        vim.lsp.enable "glsl_analyzer"  -- GSLS: glsl_analyzer (.local)
 
         vim.api.nvim_create_autocmd("LspAttach", {
             desc = "LSP settings set on attach",
